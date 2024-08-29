@@ -1,0 +1,12 @@
+POST http://localhost:3001/api/blogs HTTP/1.1
+content-type: application/json
+
+{
+    "title": "the tree in the jungle",
+    "author": "ej prieto",
+    "url": "url.prove.com",
+    "likes": 4
+}
+
+###
+GET http://localhost:3001/api/blogs HTTP/1.1

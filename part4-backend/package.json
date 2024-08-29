@@ -1,0 +1,23 @@
+{
+  "name": "part4-ejprieto",
+  "version": "1.0.0",
+  "description": "backend for part4 exercises",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../part4-frontend && npm run build && @powershell Copy-Item dist -Recurse ../part4-backend"
+  },
+  "author": "ejprieto",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
