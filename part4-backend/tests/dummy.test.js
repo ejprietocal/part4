@@ -2,12 +2,6 @@ const { test, describe } = require('node:test')
 const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 
-test('dummy returns one', () => {
-  const blogs = []
-
-  const result = listHelper.dummy(blogs)
-  assert.strictEqual(result, 1)
-})
 const blogs = [
     {
       _id: "5a422a851b54a676234d17f7",
@@ -58,6 +52,13 @@ const blogs = [
       __v: 0
     }  
   ]
+
+test('dummy returns one', () => {
+    const blogs = []
+  
+    const result = listHelper.dummy(blogs)
+    assert.strictEqual(result, 1)
+  })
 
 describe('totalLikes', () =>{
     test('of emty list is zero', () =>{
