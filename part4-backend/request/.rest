@@ -1,9 +1,9 @@
 POST http://localhost:3001/api/blogs HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NmQyNDU5YTIwYTg0MTRkMjkzOWU3NmYiLCJpYXQiOjE3MjUwNTY0MjEsImV4cCI6MTcyNTA2MDAyMX0.DpbbWzaXCgMMW1_-1XO3N-vrwdI0T4gF4XQv_-qZYLg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY2ZDI5MmRhZDMzM2I5ZjE0MzFiMWNkNSIsImlhdCI6MTcyNTA3NjIwNywiZXhwIjoxNzI1MDc5ODA3fQ.TviYaiFaVRXxQDHSqLHaMNEez0YcWVGVrYoL7VJAn0w
 
 {
-    "title": "Making a new Blog with token",
+    "title": "Making a new Blog with token as superuser",
     "author": "ej prieto",
     "url": "url.prove.com",
     "likes": 4
@@ -30,9 +30,9 @@ POST http://localhost:3001/api/users HTTP/1.1
 content-type: application/json
 
 {
-    "username": "mluukkai",
-    "name": "Matti Luukkainen",
-    "password": "salainen"
+    "username": "root",
+    "name": "Super user",
+    "password": "locarios"
 }
 
 ###making login
@@ -43,3 +43,15 @@ content-type: application/json
     "username": "mluukkai",
     "password": "salainen"
 }
+###making login
+POST http://localhost:3001/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "root",
+    "password": "locarios"
+}
+
+###Deleting a blog
+DELETE http://localhost:3001/api/blogs/66d28f21984fa0d217f6254d HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NmQyNDU5YTIwYTg0MTRkMjkzOWU3NmYiLCJpYXQiOjE3MjUxMTg5MzAsImV4cCI6MTcyNTEyMjUzMH0.2kcrtIfGI0d1WKZcQ8kEMiqtvm1RW_D25lqlDIZ4DaE
