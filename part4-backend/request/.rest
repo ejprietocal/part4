@@ -14,14 +14,14 @@ GET http://localhost:3001/api/blogs HTTP/1.1
 
 ###
 
-PUT http://localhost:3001/api/blogs/5a422bc61b54a676234d17fc HTTP/1.1
+PUT http://localhost:3001/api/blogs/66df88157e4e64f5eff4fc06 HTTP/1.1
 content-type: application/json
 
 {
     "title": "Proff that updating new blog works",
     "author": "amanda lopez",
     "url": "updated.forest.com",
-    "likes": 7
+    "likes": 10
 }
 
 ### creating user

@@ -1,6 +1,7 @@
 const blogRouter = require('express').Router()
 const Blog = require('../models/email')
 const User = require('../models/user')
+const middleware = require('../utils/middleware')
 
 const jwt = require('jsonwebtoken')
 
@@ -19,7 +20,7 @@ blogRouter.get('/:id', async (request, response) => {
     }
   })
 
-blogRouter.post('/', async (request, response) => {
+blogRouter.post('/',middleware.userExtractor,async (request, response) => {
 
     const {title,author,url,likes} = request.body
 
@@ -40,12 +41,12 @@ blogRouter.post('/', async (request, response) => {
     const savedBlog = await blog.save()
     user.blogs = user.blogs.concat(savedBlog._id)
     await user.save()
-    response.status(201).json(savedBlog)
+    const populatedBlog = await Blog.findById(savedBlog._id).populate('user', { username: 1, name: 1 });
+
+    response.status(201).json(populatedBlog)
 })
 
-blogRouter.delete('/:id', async (request, response) =>{
-
-
+blogRouter.delete('/:id',middleware.userExtractor,async (request, response) =>{
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
   if (!decodedToken.id) {
     return response.status(401).json({ error: 'token invalid' })
@@ -55,8 +56,8 @@ blogRouter.delete('/:id', async (request, response) =>{
 
   
   if ( blog.user.toString() === user.id ){
-    await Blog.findByIdAndDelete(blog.id)
-    return response.status(204).end()
+    const blogDeleted = await Blog.findByIdAndDelete(blog.id)
+    return response.status(200).json(blogDeleted)
   }else{
     return response.status(401).json({ error: 'not created by this user' })
   }
@@ -64,8 +65,8 @@ blogRouter.delete('/:id', async (request, response) =>{
 
 blogRouter.put('/:id', async(request, response) =>{
   const blog = request.body
-  await Blog.findByIdAndUpdate(request.params.id,blog)
-  response.status(200).end()
+  const savedBlog = await Blog.findByIdAndUpdate(request.params.id,blog, {new: true})
+  response.status(200).json(savedBlog)
 })
 
 
